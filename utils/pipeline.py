@@ -31,8 +31,8 @@ class Pipeline(object):
         return list(file_ext_set)
 
     def get_folders(self):
-        return list(map(lambda x:(x[0].replace('\\','/')),
-                       list(filter(lambda x:'\\' in x[0],os.walk(self.__BASE_PATH__)))))
+        return list(filter(lambda x:len(x.split('/'))>3,
+                list(map(lambda x:(x[0].replace(os.path.sep,'/')),os.walk(self.__BASE_PATH__)))))
     @lazy
     def _map(self):
         if self.use_mp:
